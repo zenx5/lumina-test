@@ -9,7 +9,7 @@ import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map
 })
 export class AppComponent 
 {
-  public map:Map;
+  public map!:Map;
   
   public mapOptions:MapOptions = {
     zoom: 17,
