@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-graphic-attribute',
@@ -7,9 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphicAttributeComponent implements OnInit {
 
-  constructor() { }
+  @Input() stats:any
+  public selection:string='none';
+  
+  public getData(){
+    if(this.selection !== 'none'){
+      return Object.keys( this.stats[this.selection] )
+    }
+    return []
+  }
+
+  public eventChanged(event:any){
+    this.selection = event!.target!.value
+  }
+
+  constructor() {
+    console.log( this.stats)
+   }
 
   ngOnInit(): void {
+    console.log( this.stats)
   }
 
 }

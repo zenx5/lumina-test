@@ -10,6 +10,12 @@ import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map
 export class AppComponent 
 {
   public map!:Map;
+  public stats:any = {
+    tipo_lampara : {},
+    tipo_luminaria : {},
+    tipo_soporte : {},
+  }
+  
   
   public mapOptions:MapOptions = {
     zoom: 17,
@@ -40,7 +46,26 @@ export class AppComponent
   }
 
   public handlerEventInPoint = (feature:any) => () =>{
+    console.log(feature)
     this.target = feature
+  }
+
+  private eventForEachFeature(feature:GeoJSON.Feature, layer:Layer){
+    layer.addEventListener('click', this.handlerEventInPoint(feature))
+    this.addStats(feature, 'tipo_lampara' )
+    this.addStats(feature, 'tipo_luminaria' )
+    this.addStats(feature, 'tipo_soporte' )
+    
+  }
+
+  private addStats(feature:GeoJSON.Feature, type:string){
+    if( feature!.properties![type] !== undefined ){
+      if( this.stats[type][`${feature!.properties![type]}`] ){
+        this.stats[type][`${feature!.properties![type]}`]++;
+      }else{
+        this.stats[type] = { ...this.stats[type], [`${feature!.properties![type]}`] : 1}
+      }      
+    }
   }
 
   public onMapReady(map:Map):void
@@ -55,7 +80,7 @@ export class AppComponent
     const luminaires = await (await fetch('assets/data/luminarias.geojson')).json();
     const options:GeoJSONOptions = {
       pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
-      onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => layer.addEventListener('click', this.handlerEventInPoint(feature) ),
+      onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => this.eventForEachFeature(feature, layer),
       style: feature =>  ({
         radius: 8, 
         color: "#333",
@@ -66,5 +91,6 @@ export class AppComponent
       }) 
     };
     geoJSON(luminaires, options).addTo(this.map);
+    console.log( luminaires.features[0] )
   }
 }
