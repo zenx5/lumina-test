@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ToolBarComponent implements OnInit {
 
   @Input() point!:any
+  @Input() stats!:any
 
   constructor() { }
 

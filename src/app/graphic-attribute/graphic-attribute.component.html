@@ -1,0 +1,19 @@
+<div>
+    <h3>Analísis Grafico</h3>
+    <hr>
+    <p>Atributo</p>
+    <select style="width:100%" (change)="eventChanged($event)">
+        <option value="none">Seleccion Atributo</option>
+        <option value="tipo_soporte">Tipo Soporte</option>
+        <option value="tipo_luminaria">Tipo Luminaria</option>
+        <option value="tipo_lampara">Tipo Lampara</option>
+    </select>
+    <div class="graphic">
+        <i>{{selection}}</i> 
+        <div>
+            <p *ngFor="let option of getData()" >
+                {{option}} : {{stats[selection][option]}}
+            </p>
+        </div>
+    </div>
+</div>
