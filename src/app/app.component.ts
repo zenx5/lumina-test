@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map, MapOptions, tileLayer, TileLayer } from 'leaflet';
+import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map, MapOptions, tileLayer, TileLayer, ZoomOptions } from 'leaflet';
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map
 export class AppComponent 
 {
   public map:Map;
-
+  
   public mapOptions:MapOptions = {
     zoom: 17,
     zoomControl: false,
@@ -18,6 +19,7 @@ export class AppComponent
   };
 
   public baseLayer:TileLayer;
+  public target!:any
 
   public  mapFitBounds:LatLngBounds = new LatLngBounds([
     [37.50547228, -4.22810257],
@@ -37,18 +39,23 @@ export class AppComponent
 
   }
 
+  public handlerEventInPoint = (feature:any) => () =>{
+    this.target = feature
+  }
+
   public onMapReady(map:Map):void
   {
     this.map = map;
+    
     this.addLuminairesLayer();
   }
 
   private async addLuminairesLayer():Promise<void>
   {
     const luminaires = await (await fetch('assets/data/luminarias.geojson')).json();
-
     const options:GeoJSONOptions = {
       pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
+      onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => layer.addEventListener('click', this.handlerEventInPoint(feature) ),
       style: feature =>  ({
         radius: 8, 
         color: "#333",
@@ -58,7 +65,6 @@ export class AppComponent
         fillOpacity: 1
       }) 
     };
-
     geoJSON(luminaires, options).addTo(this.map);
   }
 }
