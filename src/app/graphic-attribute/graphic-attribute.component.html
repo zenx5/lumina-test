@@ -9,11 +9,8 @@
         <option value="tipo_lampara">Tipo Lampara</option>
     </select>
     <div class="graphic">
-        <i>{{selection}}</i> 
         <div>
-            <p *ngFor="let option of getData()" >
-                {{option}} : {{stats[selection][option]}}
-            </p>
+            <canvas id="g-attr-canvas" style="display: {{selection=='none'?'none':'block'}};"></canvas>
         </div>
     </div>
 </div>
