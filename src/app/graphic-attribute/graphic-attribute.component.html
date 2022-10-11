@@ -2,7 +2,7 @@
     <h3>Analísis Grafico</h3>
     <hr>
     <p>Atributo</p>
-    <select style="width:100%" (change)="eventChanged($event)">
+    <select class="selection" (change)="eventChanged($event)">
         <option value="none">Seleccion Atributo</option>
         <option value="tipo_soporte">Tipo Soporte</option>
         <option value="tipo_luminaria">Tipo Luminaria</option>
@@ -11,6 +11,9 @@
     <div class="graphic">
         <div>
             <canvas id="g-attr-canvas" style="display: {{selection=='none'?'none':'block'}};"></canvas>
+        </div>
+        <div>
+            <canvas id="grafico"></canvas>
         </div>
     </div>
 </div>

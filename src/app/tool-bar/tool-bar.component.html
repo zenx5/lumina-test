@@ -1,6 +1,8 @@
 <div class="container">
-
-    <app-board-detail [feature]="point"></app-board-detail>
-
-    <app-graphic-attribute [stats]="stats"></app-graphic-attribute>
+    <nav class="navigation">
+        <a mat-button routerLink="/informacion-elemento">Info</a>
+        <a mat-button routerLink="/analisis-grafico">grafico</a>
+    </nav>
+    
+    <router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
 </div>

@@ -25,10 +25,7 @@ export class BoardDetailComponent implements OnInit {
     {key: 'marca_luminaria',  label:  'Marca Luminaria'},
     {key: 'marca_soporte',  label:  'Marca Soporte'},
     {key: 'modelo_lampara',  label:  'Modelo lampara'}
-  ]
-
-
-  
+  ] 
 
   constructor() { }
 

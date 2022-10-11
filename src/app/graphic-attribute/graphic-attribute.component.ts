@@ -28,13 +28,11 @@ export class GraphicAttributeComponent implements OnInit {
     this.chart.data.labels = keys
     this.chart.data.datasets[0].data = values
     this.chart.data.datasets[0].backgroundColor = this.getColors(values.length)
-    this.chart.update()
-    
+    this.chart.update()    
   }
 
   getColors(quantity:number){
     const hex = (N:number)=>Math.floor(Math.random()*N).toString(16)
-
     return (new Array(quantity)).fill('').map(e=>{
       return `#${hex(16)}${hex(10)}${hex(16)}`
     })
@@ -45,16 +43,12 @@ export class GraphicAttributeComponent implements OnInit {
     if( event!.target!.value !== 'none' ){
       this.draw()
     }
-    
   }
 
-  constructor() {
-    
-
-   }
-
+  constructor() {}
    
   ngOnInit(): void {    
+    console.log('init')
     this.context = document.querySelector('#g-attr-canvas')    
     Chart.register(...registerables);
     this.chart = new Chart(this.context, 
@@ -72,9 +66,6 @@ export class GraphicAttributeComponent implements OnInit {
       }
     )
     this.chart.options.plugins.legend.position = 'bottom'
-    this.chart.update()
-
-    
+    this.chart.update()    
   }
-
 }

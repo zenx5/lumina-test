@@ -1,8 +1,12 @@
-<table *ngIf="feature && feature?.properties">
+<h3>Informacion del Elemento</h3>
+<hr>
+<table>
     <tbody>
         <tr *ngFor="let map of mapping" >
-            <th>{{map.label}}</th>
-            <td >{{feature.properties![map.key]}}</td>
+            <td>{{map.label}}</td>
+            <td *ngIf="feature && feature?.properties">{{feature.properties![map.key]}}</td>
+            <td *ngIf="!feature?.properties">-</td>
+
         </tr>
     </tbody>
 </table>
