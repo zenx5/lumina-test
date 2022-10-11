@@ -13,15 +13,7 @@ export class ToolBarComponent implements OnInit {
   @Input() point!:GeoJSON.Feature
   @Input() stats!:any
 
-  onOutletLoaded(component:any) {
-    if( component instanceof GraphicAttributeComponent){
-      console.log( this.stats )
-      component.stats = this.stats
-    }else if( component instanceof BoardDetailComponent ){
-      component.feature = this.point
-    }
-  }
-
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -21,7 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
     ToolBarComponent,
     BoardDetailComponent,
-    GraphicAttributeComponent,    
+    GraphicAttributeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatButtonModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

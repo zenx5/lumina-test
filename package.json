@@ -22,6 +22,7 @@
     "@angular/router": "~13.3.0",
     "@asymmetrik/ngx-leaflet": "^13.0.2",
     "chart.js": "^3.9.1",
+    "highcharts-angular": "^3.0.0",
     "leaflet": "^1.8.0",
     "randomcolor": "^0.6.2",
     "rxjs": "~7.5.0",

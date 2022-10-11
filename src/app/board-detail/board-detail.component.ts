@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LuminairesService } from '../luminaires.service';
 
 
 @Component({
@@ -8,7 +9,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BoardDetailComponent implements OnInit {
 
-  @Input() feature!:GeoJSON.Feature
+  feature!:GeoJSON.Feature
+  
 
   public mapping:any = [
     {key: 'altura', label: 'Altura'},
@@ -27,11 +29,14 @@ export class BoardDetailComponent implements OnInit {
     {key: 'modelo_lampara',  label:  'Modelo lampara'}
   ] 
 
-  constructor() { }
+  constructor(private luminairesService:LuminairesService) {
+    this.luminairesService.subscribeUpdate((feature:GeoJSON.Feature)=>{
+      this.feature = feature
+    })
+  }
 
   ngOnInit(): void {
-    
-
+    this.feature = this.luminairesService.getCurrentFeature()
   }
 
 }

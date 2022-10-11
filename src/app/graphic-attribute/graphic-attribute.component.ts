@@ -1,6 +1,9 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { Chart, PieController, LineController, registerables } from 'chart.js'
 
+import { LuminairesService } from '../luminaires.service';
+
+
 
 
 @Component({
@@ -15,16 +18,10 @@ export class GraphicAttributeComponent implements OnInit {
   private context!:any
   private chart!:any
   
-  public getData(){
-    if(this.selection !== 'none'){
-      return Object.keys( this.stats[this.selection] )
-    }
-    return []
-  }
-
-  public draw(){
-    const keys = Object.keys( this.stats[this.selection] )
-    const values = Object.values( this.stats[this.selection] )
+  public async draw(){
+    const stats = await this.luminairesService.getStats(this.selection)
+    const keys = stats.filter(stat=>stat.tag!==null).map( stat => stat.tag )
+    const values = stats.filter(stat=>stat.tag!==null).map( stat => stat.count )
     this.chart.data.labels = keys
     this.chart.data.datasets[0].data = values
     this.chart.data.datasets[0].backgroundColor = this.getColors(values.length)
@@ -45,7 +42,7 @@ export class GraphicAttributeComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  constructor(private luminairesService:LuminairesService) {}
    
   ngOnInit(): void {    
     console.log('init')

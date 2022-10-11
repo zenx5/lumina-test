@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { circleMarker, geoJSON, GeoJSONOptions, LatLng, LatLngBounds, Layer, Map, MapOptions, tileLayer, TileLayer } from 'leaflet';
+import { LuminairesService } from './luminaires.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class AppComponent
     [37.70590845000001, -3.98959274]
   ]);
 
-  public constructor()
+  public constructor(private luminairesService:LuminairesService)
   {
     this.baseLayer = tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       crossOrigin: 'anonymous',
@@ -47,50 +48,46 @@ export class AppComponent
     if( this.lastLayer ){
       this.lastLayer.options.fillColor = '#FFFA4D'
     }    
-    this.target = feature
+    this.luminairesService.setCurrentFeature(feature)
     this.lastLayer = layer
     layer.options.fillColor = '#f00'
     this.map.flyTo(new LatLng(feature.geometry.coordinates[1],feature.geometry.coordinates[0]),17,{animate:true})
   }
 
-  private eventForEachFeature(feature:GeoJSON.Feature, layer:Layer){
-    layer.addEventListener('click', this.handlerEventInPoint(feature, layer))
-    this.addStats(feature, 'tipo_lampara' )
-    this.addStats(feature, 'tipo_luminaria' )
-    this.addStats(feature, 'tipo_soporte' )    
-  }
+  
 
-  private addStats(feature:GeoJSON.Feature, type:string){
-    if( feature!.properties![type] !== undefined ){
-      if( this.stats[type][`${feature!.properties![type]}`] ){
-        this.stats[type][`${feature!.properties![type]}`]++;
-      }else{
-        this.stats[type] = { ...this.stats[type], [`${feature!.properties![type]}`] : 1}
-      }      
-    }
-  }
+  // private addStats(feature:GeoJSON.Feature, type:string){
+  //   if( feature!.properties![type] !== undefined ){
+  //     if( this.stats[type][`${feature!.properties![type]}`] ){
+  //       this.stats[type][`${feature!.properties![type]}`]++;
+  //     }else{
+  //       this.stats[type] = { ...this.stats[type], [`${feature!.properties![type]}`] : 1}
+  //     }      
+  //   }
+  // }
 
   public onMapReady(map:Map):void
   {
     this.map = map;    
-    this.addLuminairesLayer();
+    //this.addLuminairesLayer();
+    this.luminairesService.addLuminairesLayerToMap(map, this.handlerEventInPoint)
   }
 
-  private async addLuminairesLayer():Promise<void>
-  {
-    const luminaires = await (await fetch('assets/data/luminarias.geojson')).json();
-    const options:GeoJSONOptions = {
-      pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
-      onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => this.eventForEachFeature(feature, layer),
-      style: feature =>  ({
-        radius: 8, 
-        color: "#333",
-        fillColor: "#FFFA4D",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 1
-      }) 
-    };
-    geoJSON(luminaires, options).addTo(this.map); 
-  }
+  // private async addLuminairesLayer():Promise<void>
+  // {
+  //   const luminaires = await (await fetch('assets/data/luminarias.geojson')).json();
+  //   const options:GeoJSONOptions = {
+  //     pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
+  //     onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => this.eventForEachFeature(feature, layer),
+  //     style: feature =>  ({
+  //       radius: 8, 
+  //       color: "#333",
+  //       fillColor: "#FFFA4D",
+  //       weight: 1,
+  //       opacity: 1,
+  //       fillOpacity: 1
+  //     }) 
+  //   };
+  //   geoJSON(luminaires, options).addTo(this.map); 
+  // }
 }
