@@ -1,60 +1,8 @@
-<table>
+<table *ngIf="feature && feature?.properties">
     <tbody>
-        <tr>
-            <td>Altura</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Cantidad de lamparas</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>Distancia eje</td>
-            <td>ninguno</td>
-        </tr>
-        <tr>
-            <td>Equipo auxiliar</td>
-            <td>ELECTRONICO</td>
-        </tr>
-        <tr>
-            <td>Estado lampara</td>
-            <td>BIEN</td>
-        </tr>
-        <tr>
-            <td>Estado luminaria</td>
-            <td>BIEN</td>
-        </tr>
-        <tr>
-            <td>Estado soporte</td>
-            <td>BIEN</td>
-        </tr>
-        <tr>
-            <td>Etiqueta</td>
-            <td>Ninguno</td>
-        </tr>
-        <tr>
-            <td>Lado via</td>
-            <td>Ninguno</td>
-        </tr>
-        <tr>
-            <td>Longitud brazo</td>
-            <td>Ninguno</td>
-        </tr>
-        <tr>
-            <td>Marca lampara</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Marca luminaria</td>
-            <td>AYLCO ALCAUDETE</td>
-        </tr>
-        <tr>
-            <td>Marca soporte</td>
-            <td>GENERICO</td>
-        </tr>
-        <tr>
-            <td>Modelo lampara</td>
-            <td>-</td>
+        <tr *ngFor="let map of mapping" >
+            <th>{{map.label}}</th>
+            <td >{{feature.properties![map.key]}}</td>
         </tr>
     </tbody>
 </table>

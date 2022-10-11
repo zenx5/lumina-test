@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ToolBarComponent implements OnInit {
 
-  @Input() point!:any
+  @Input() point!:GeoJSON.Feature
   @Input() stats!:any
 
   constructor() { }
