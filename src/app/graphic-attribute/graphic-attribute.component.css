@@ -7,7 +7,29 @@
 
 .selection{
     padding: 10px;
-    width: 100%;
+    
     border-radius: 4px;
     background: white;
+}
+
+
+/* iPhone 4/5 */
+@media only screen and (min-width: 320px) {
+    .selection{ 
+        padding: 10px;
+        width: 90vw;
+        border-radius: 4px;
+        background: white;
+    }
+}
+
+
+/* Galaxy S3/S4/S5 Landscape*/
+@media only screen and (min-width: 667px) {
+    .selection{
+        padding: 10px;
+        width: 100%;
+        border-radius: 4px;
+        background: white;
+    }
 }
