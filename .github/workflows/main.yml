@@ -36,4 +36,7 @@ jobs:
     # Runs a single command using the runners shell
       - name: Run install
         run: npm start
+    # Runs a single command using the runners shell
+      - name: Run deploy
+        run: actions/deploy-pages@v1
       
