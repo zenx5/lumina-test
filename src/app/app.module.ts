@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { BoardDetailComponent } from './board-detail/board-detail.component';
 import { GraphicAttributeComponent } from './graphic-attribute/graphic-attribute.component';
+import { TabComponent } from './tab/tab.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolBarComponent,
     BoardDetailComponent,
-    GraphicAttributeComponent
+    GraphicAttributeComponent,
+    TabComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,36 @@
+.tabMenu {
+    width: 100%;
+    background: hsl(0, 0%, 93%);
+    height: auto;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+    list-style-type: none;
+}
+.tabMenu li {
+    cursor: pointer;
+    float: left;
+    background: hsl(0, 0%, 93%);
+    padding: 10px 0;
+    margin: 0;
+   }
+.tabMenu span {
+    padding: 12px 20px;
+}
+.tabMenu li.active {
+    background: hsl(0, 0%, 31%);   
+    color: #fff;
+}
+.tabMenu li:hover {
+    background: hsl(0, 0%, 31%);
+    color: #fff;
+}
+.tabContent {
+    display: none;
+}
+.tabContent.active {
+    display: block;
+}
+.tabs {
+    margin: 15px 0 0;
+}
