@@ -54,17 +54,6 @@ export class AppComponent
     this.map.flyTo(new LatLng(feature.geometry.coordinates[1],feature.geometry.coordinates[0]),17,{animate:true})
   }
 
-  
-
-  // private addStats(feature:GeoJSON.Feature, type:string){
-  //   if( feature!.properties![type] !== undefined ){
-  //     if( this.stats[type][`${feature!.properties![type]}`] ){
-  //       this.stats[type][`${feature!.properties![type]}`]++;
-  //     }else{
-  //       this.stats[type] = { ...this.stats[type], [`${feature!.properties![type]}`] : 1}
-  //     }      
-  //   }
-  // }
 
   public onMapReady(map:Map):void
   {
@@ -73,21 +62,5 @@ export class AppComponent
     this.luminairesService.addLuminairesLayerToMap(map, this.handlerEventInPoint)
   }
 
-  // private async addLuminairesLayer():Promise<void>
-  // {
-  //   const luminaires = await (await fetch('assets/data/luminarias.geojson')).json();
-  //   const options:GeoJSONOptions = {
-  //     pointToLayer: (feature:GeoJSON.Feature, latLng:LatLng) => circleMarker(latLng),
-  //     onEachFeature: (feature:GeoJSON.Feature, layer:Layer) => this.eventForEachFeature(feature, layer),
-  //     style: feature =>  ({
-  //       radius: 8, 
-  //       color: "#333",
-  //       fillColor: "#FFFA4D",
-  //       weight: 1,
-  //       opacity: 1,
-  //       fillOpacity: 1
-  //     }) 
-  //   };
-  //   geoJSON(luminaires, options).addTo(this.map); 
-  // }
+
 }
