@@ -40,12 +40,15 @@ esta debe ser enfocada (aumentando el zoom del mapa) y resaltada de alguna maner
 mientras que en la barra lateral se deben listar, en un formulario, sus atributos. Al
 seleccionar otra luminaria, si había una luminaria seleccionada, esta debe ser
 atenuada.
+
 2. Análisis gráfico:
 Mediante un selector u otro campo que permita seleccionar un atributo, debe
 generarse un gráfico de torta a partir de los datos existentes de las luminarias para el
 atributo seleccionado. Los atributos por los cuales se podrá hacer el análisis serán
 tipo_soporte, tipo_luminaria y tipo_lampara. El grafico debe actualizarse al cambiar
-de atributo.Criterios a evaluar:
+de atributo.
+
+Criterios a evaluar:
 El cambio de herramientas dentro de la barra debe hacerse mediante enrutamiento,
 es decir, cada botón debe llevar a una ruta distinta que mostrara la herramienta
 especifica (ejemplo, botón de información lleva a “/información-elemento” y botón
